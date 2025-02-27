@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import "./App.css";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Table, TableHead, TableRow, TableCell, TableBody } from "@/components/ui/table";
+import { Card, CardContent } from "./components/ui/card";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
+import { Table, TableHead, TableRow, TableCell, TableBody } from "./components/ui/table";
 
 export default function RepTracker() {
   const [workouts, setWorkouts] = useState([]);
