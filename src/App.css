@@ -1,4 +1,3 @@
-/* Global Styles */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -10,12 +9,10 @@ body {
   min-height: 100vh;
 }
 
-/* Main Container */
 .min-h-screen {
   min-height: 100vh;
 }
 
-/* Card Styling */
 .bg-gray-800 {
   background-color: #1f2937;
   border-radius: 16px;
@@ -23,7 +20,6 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Input Fields */
 input {
   width: 100%;
   padding: 12px;
@@ -40,7 +36,6 @@ input:focus {
   border: 2px solid #22c55e;
 }
 
-/* Button Styles */
 button {
   width: 100%;
   padding: 12px;
@@ -60,7 +55,6 @@ button {
   background-color: #16a34a;
 }
 
-/* Table Styling */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -80,3 +74,4 @@ th, td {
 tr:hover {
   background-color: #1f2937;
 }
+  
