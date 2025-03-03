@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "./firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import "./App.css"; // Import updated styles
 
 export default function Auth() {
   const [email, setEmail] = useState("");
@@ -13,6 +18,11 @@ export default function Auth() {
 
   const handleSignup = async () => {
     try {
+      if (!email.includes("@") || password.length < 6) {
+        setError("Please enter a valid email and password (min 6 characters)");
+        return;
+      }
+
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -20,7 +30,7 @@ export default function Auth() {
       setMessage("A verification email has been sent. Please check your inbox.");
       navigate("/verify-email"); // ✅ Redirect to verification page
     } catch (err) {
-      setError(err.message);
+      setError(getFriendlyError(err.code));
     }
   };
 
@@ -37,19 +47,67 @@ export default function Auth() {
 
       navigate("/dashboard"); // ✅ Go to main dashboard
     } catch (err) {
-      setError(err.message);
+      setError(getFriendlyError(err.code));
+    }
+  };
+
+  const getFriendlyError = (errorCode) => {
+    switch (errorCode) {
+      case "auth/user-not-found":
+        return "No account found with this email. Please try again.";
+      case "auth/wrong-password":
+        return "Incorrect password. Please try again.";
+      case "auth/invalid-email":
+        return "Invalid email format. Please enter a valid email.";
+      case "auth/email-already-in-use":
+        return "This email is already in use. Try logging in.";
+      case "auth/weak-password":
+        return "Password is too weak. Use at least 6 characters.";
+      default:
+        return "An error occurred. Please try again.";
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-3xl font-bold mb-6">{isSignUp ? "Sign Up" : "Login"}</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      {message && <p className="text-green-500 mb-4">{message}</p>}
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={isSignUp ? handleSignup : handleLogin}>{isSignUp ? "Sign Up" : "Login"}</button>
-      <p onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? "Already have an account? Login" : "New here? Sign up"}</p>
+    <div className="container">
+      <h1>{isSignUp ? "Sign Up" : "Login"}</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {message && <p style={{ color: "green" }}>{message}</p>}
+
+      <div className="input-group">
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Type your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <div className="input-group">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Type your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <button onClick={isSignUp ? handleSignup : handleLogin}>
+        {isSignUp ? "SIGN UP" : "LOGIN"}
+      </button>
+
+      <div className="or-divider">Or Sign Up Using</div>
+      <div className="social-login">
+        <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
+        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" />
+      </div>
+
+      <div className="auth-footer">
+        {isSignUp ? "Already have an account?" : "New here?"}{" "}
+        <span onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? "Login" : "Sign Up"}</span>
+      </div>
     </div>
   );
 }
