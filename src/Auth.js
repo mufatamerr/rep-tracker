@@ -28,7 +28,7 @@ export default function Auth() {
 
       await sendEmailVerification(user);
       setMessage("A verification email has been sent. Please check your inbox.");
-      navigate("/verify-email"); // ✅ Redirect to verification page
+      navigate("/verify-email"); // Redirect to verification page
     } catch (err) {
       setError(getFriendlyError(err.code));
     }
@@ -41,11 +41,11 @@ export default function Auth() {
 
       if (!user.emailVerified) {
         setError("Please verify your email before logging in.");
-        navigate("/verify-email"); // ✅ Redirect to verification page
+        navigate("/verify-email"); // Redirect to verification page
         return;
       }
 
-      navigate("/dashboard"); // ✅ Go to main dashboard
+      navigate("/dashboard"); // Go to main dashboard
     } catch (err) {
       setError(getFriendlyError(err.code));
     }
@@ -69,7 +69,7 @@ export default function Auth() {
   };
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <h1>{isSignUp ? "Sign Up" : "Login"}</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {message && <p style={{ color: "green" }}>{message}</p>}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db, auth, collection, addDoc, getDocs, deleteDoc, doc } from "./firebase"; // ✅ Import Firestore functions
+import { db, auth, collection, addDoc, getDocs, deleteDoc, doc } from "./firebase"; 
 import "./App.css";
 
 export default function RepTracker() {
@@ -7,15 +7,14 @@ export default function RepTracker() {
   const [workoutName, setWorkoutName] = useState("");
   const [reps, setReps] = useState("");
   const [weight, setWeight] = useState("");
-  const user = auth.currentUser; // ✅ Get the logged-in user
+  const user = auth.currentUser; 
 
   useEffect(() => {
     if (user) {
-      loadWorkouts(); // ✅ Load workouts when user logs in
+      loadWorkouts(); 
     }
   }, [user]);
 
-  // ✅ Load Workouts from Firestore
   const loadWorkouts = async () => {
     if (!user) return;
     const workoutsCollection = collection(db, "users", user.uid, "workouts");
@@ -27,14 +26,13 @@ export default function RepTracker() {
     setWorkouts(workoutList);
   };
 
-  // ✅ Add Workout to Firestore
   const addWorkout = async () => {
     if (workoutName && reps > 0 && weight > 0) {
       const newWorkout = { workoutName, reps, weight };
 
       if (user) {
         const workoutsCollection = collection(db, "users", user.uid, "workouts");
-        await addDoc(workoutsCollection, newWorkout); // ✅ Save workout in Firestore
+        await addDoc(workoutsCollection, newWorkout); 
       }
 
       setWorkouts([...workouts, newWorkout]);
@@ -44,7 +42,6 @@ export default function RepTracker() {
     }
   };
 
-  // ✅ Delete Workout from Firestore
   const deleteWorkout = async (id) => {
     if (!user) return;
     await deleteDoc(doc(db, "users", user.uid, "workouts", id));
@@ -53,28 +50,13 @@ export default function RepTracker() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-5xl font-bold neon-glow">Rep Tracker</h1>
+      <h1>Rep Tracker</h1>
 
       <div className="card w-full max-w-lg mt-6">
-        <input
-          type="text"
-          placeholder="Workout Name"
-          value={workoutName}
-          onChange={(e) => setWorkoutName(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Reps"
-          value={reps}
-          onChange={(e) => setReps(Math.max(0, Number(e.target.value)))}
-        />
-        <input
-          type="number"
-          placeholder="Weight (lbs)"
-          value={weight}
-          onChange={(e) => setWeight(Math.max(0, Number(e.target.value)))}
-        />
-        <button onClick={addWorkout}>Add Workout</button>
+        <input type="text" placeholder="Workout Name" value={workoutName} onChange={(e) => setWorkoutName(e.target.value)} />
+        <input type="number" placeholder="Reps" value={reps} onChange={(e) => setReps(Math.max(0, Number(e.target.value)))} />
+        <input type="number" placeholder="Weight (lbs)" value={weight} onChange={(e) => setWeight(Math.max(0, Number(e.target.value)))} />
+        <button onClick={addWorkout} className="add-btn">Add Workout</button>
       </div>
 
       <table className="workout-table">
@@ -87,14 +69,12 @@ export default function RepTracker() {
           </tr>
         </thead>
         <tbody>
-          {workouts.map((workout, index) => (
+          {workouts.map((workout) => (
             <tr key={workout.id}>
               <td>{workout.workoutName}</td>
               <td>{workout.reps}</td>
               <td>{workout.weight}</td>
-              <td>
-                <button onClick={() => deleteWorkout(workout.id)} className="delete-btn">🗑️</button>
-              </td>
+              <td><button onClick={() => deleteWorkout(workout.id)} className="delete-btn">🗑️</button></td>
             </tr>
           ))}
         </tbody>
