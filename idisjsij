@@ -1,0 +1,71 @@
+[33mcommit 5394cdbee249e0377aa6ca5afe9dd8a1b2322ee1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Tue Mar 11 22:27:33 2025 -0400
+
+    fixed stupid css login issue
+
+[33mcommit 7a49d5c25427be24a8b57231eec5caf00972ccd4[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Sun Mar 2 19:45:02 2025 -0500
+
+    imported cool css background style
+
+[33mcommit 501fdb0f23c33a6893a847a5baedc0cf69caf445[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Sun Mar 2 19:21:44 2025 -0500
+
+    quality of life changed done to refresh page
+
+[33mcommit ca47f653555d1ad1eb0c7bec39885956166a130a[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Sun Mar 2 18:53:07 2025 -0500
+
+    made the firebase actually work
+
+[33mcommit 738e58d88be18e65c05bbe2bce1e7f142d53d333[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Sun Mar 2 18:47:33 2025 -0500
+
+    css updated
+
+[33mcommit a0305946ac60f7b1917064f9075580b3e83a5475[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Fri Feb 28 16:59:54 2025 -0500
+
+    added login verification
+
+[33mcommit 4920399df5c7fab074555cb2998b1b2a5a4184ee[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Thu Feb 27 16:10:49 2025 -0500
+
+    added firebase
+
+[33mcommit 91af670175d25176d420a4d36a2aa20561b16a03[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Thu Feb 27 15:43:18 2025 -0500
+
+    added css, along with extra files
+
+[33mcommit edda981b964d6d224bf6b9137ad0934172bc278e[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Thu Feb 27 15:31:27 2025 -0500
+
+    simple frontend prototype
+
+[33mcommit 39cbb04d439e8972f30ad7fb5e283a0d74042289[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Thu Feb 27 15:10:59 2025 -0500
+
+    github link test
+
+[33mcommit 00b8571785b56d78c82c81aec5346fe4530fb525[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Thu Feb 27 15:01:44 2025 -0500
+
+    completed project startup
+
+[33mcommit 256f8b138972d69d627f19d0d2dffc73f428223e[m
+Author: mjtam <mjtamer@outlook.com>
+Date:   Thu Feb 27 14:59:02 2025 -0500
+
+    Initialize project using Create React App

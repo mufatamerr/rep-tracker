@@ -1,8 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
 :root {
-  --primary-color: #6a11cb;
-  --secondary-color: #2575fc;
+  --primary-color: #FF4B2B;
+  --secondary-color: #2B2D42;
+  --accent-color: #00FF88;
   --white: #ffffff;
   --gray-text: #888;
   --dark-text: #222;
@@ -13,129 +12,209 @@
   --shadow-dark: rgba(0, 0, 0, 0.3);
 }
 
+/* Base Styles */
 body {
   font-family: "Poppins", sans-serif;
-  color: #222;
+  color: var(--white);
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #1a1b2e 100%);
+  overflow-x: hidden;
 }
-/* ✅ Glassmorphism Background */
+
+/* Modern Gym-themed Background */
 .background {
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background: 
+    linear-gradient(135deg, var(--secondary-color) 0%, #1a1b2e 100%),
+    radial-gradient(circle at 20% 20%, rgba(255, 75, 43, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.15) 0%, transparent 50%);
   overflow: hidden;
   z-index: -1;
 }
 
-/* ✅ Floating Balls Animation */
+/* Gym-themed Decorative Elements */
+.background::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(45deg, rgba(255, 75, 43, 0.05) 0px, rgba(255, 75, 43, 0.05) 1px, transparent 1px, transparent 10px),
+    repeating-linear-gradient(-45deg, rgba(0, 255, 136, 0.05) 0px, rgba(0, 255, 136, 0.05) 1px, transparent 1px, transparent 10px);
+  animation: patternMove 20s linear infinite;
+}
+
+/* Animations */
+@keyframes patternMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
 @keyframes moveAround {
   0% { transform: translate(0, 0) rotate(0deg); }
   50% { transform: translate(30px, -40px) rotate(20deg); }
   100% { transform: translate(-30px, 40px) rotate(-20deg); }
 }
 
-.ball {
-  position: absolute;
-  width: 18vmin;
-  height: 18vmin;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: moveAround 15s infinite ease-in-out alternate;
-}
-
-.ball:nth-child(odd) { background: rgba(0, 109, 91, 0.4); }
-.ball:nth-child(even) { background: rgba(255, 111, 97, 0.4); }
-
-.auth-container {
-  width: 100%;
-  max-width: 400px;
-  background: #ffffff; /* White background */
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
+/* Modern Card Styling */
+.card {
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  color: #222;
-}
-
-.auth-container h1 {
-  font-size: 28px;
-  font-weight: bold;
-}
-.input-group {
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+  color: var(--white);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers input fields */
-  width: 100%;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Styled Inputs */
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #f9f9f9;
-  color: #222;
-  font-size: 16px;
-  outline: none;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-input:focus {
-  border-color: #6a11cb;
-  background: #fff;
-}
-input::placeholder {
-  color: #ccc;
-}
-
-/* ✅ Buttons */
+/* Enhanced Button Styling */
 button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   color: white;
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(106, 17, 203, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
 }
 
-.logout-btn {
-  position: fixed !important; /* Keep it fixed */
-  top: 20px !important; /* Top-left positioning */
-  left: 20px !important;
-  z-index: 1000 !important; /* Ensure it's above everything */
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
 
+button:hover::after {
+  left: 100%;
+}
+
+/* Auth Container Styling */
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: var(--white);
+  transition: transform 0.3s ease;
+}
+
+.auth-container:hover {
+  transform: translateY(-5px);
+}
+
+.auth-container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Input Styling */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Logout Button */
+.logout-btn {
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  z-index: 1000 !important;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   color: white;
-  padding: 8px 14px; /* Smaller padding */
-  border-radius: 6px; /* Slightly rounded edges */
-  font-size: 14px; /* Make text smaller */
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   border: none;
-  width: auto; /* Prevent stretching */
-  min-width: 80px; /* Set a minimum size */
+  width: auto;
+  min-width: 80px;
   text-align: center;
 }
 
@@ -144,222 +223,534 @@ button:hover {
   box-shadow: 0px 4px 10px rgba(255, 65, 108, 0.3);
 }
 
-/* ✅ Dashboard Styling */
-.card {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  max-width: 400px;
-  margin: auto;
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* ✅ Centers text fields */
-  justify-content: center; /* ✅ Centers everything inside */
-}
-
-
-
-/* ✅ Workout Table */
+/* Workout Table */
 .workout-table {
   width: 100%;
   max-width: 600px;
   margin-top: 20px;
-  border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .workout-table th, .workout-table td {
-  padding: 12px;
+  padding: 16px;
   text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .workout-table th {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-color);
 }
 
 .workout-table td {
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.workout-table tr:hover td {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.workout-table tr:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* ✅ Delete Button */
+/* Delete Button */
 .delete-btn {
-  background: #ff4b2b;
+  background: linear-gradient(90deg, #ff4b2b, #ff6b6b);
   color: white;
-  padding: 8px 10px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .delete-btn:hover {
-  background: #ff1e00;
+  background: linear-gradient(90deg, #ff1e00, #ff4b2b);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 75, 43, 0.3);
 }
 
-/* ✅ Verify Email Page */
+/* Verify Email Container */
 .verify-email-container {
   text-align: center;
   max-width: 400px;
   margin: auto;
-  padding: 20px;
-  background: var(--glass-bg);
-  border-radius: 12px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .verify-email-container h1 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .verify-email-container p {
   font-size: 16px;
-  color: #ccc;
-  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
 }
 
 .verify-email-container .email-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #00ff88;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent-color);
+  padding: 10px 20px;
+  background: rgba(0, 255, 136, 0.1);
+  border-radius: 8px;
+  display: inline-block;
 }
 
 .verify-email-container .back-btn {
-  background: #444;
+  background: linear-gradient(90deg, var(--secondary-color), #1a1b2e);
   color: white;
+  margin-top: 20px;
 }
 
 .verify-email-container .back-btn:hover {
-  background: #666;
+  background: linear-gradient(90deg, #1a1b2e, var(--secondary-color));
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(to right, #141e30, #243b55);
-}
-
-/* ✅ Background for the Login Page */
-.auth-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-}
-
-.auth-container {
-  width: 100%;
-  max-width: 400px;
-  background: var(--white); /* ✅ White Background */
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  backdrop-filter: blur(10px);
-  color: var(--dark-text);
-}
-
-
-.auth-container h1 {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-/* ✅ Styled Inputs */
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 8px;
-  background: var(--input-bg);
-  color: var(--dark-text);
-  font-size: 16px;
-  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-  outline: none;
-}
-
-input:focus {
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0px 0px 10px rgba(106, 17, 203, 0.4);
-}
-
-input::placeholder {
-  color: #666;
-}
-
-/* ✅ Navbar with Small Logout Button */
+/* Navbar Styles */
 .navbar {
   width: 100%;
   height: 60px;
-  position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  padding: 0 20px;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-}
-
-
-
-.logout-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(255, 65, 108, 0.3);
-}
-
-/* ✅ Dashboard Styling */
-.card {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  max-width: 400px;
-  margin: auto;
+  justify-content: space-between;
+  background: rgba(34, 40, 49, 0.95);
   color: var(--white);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.navbar-actions {
+  display: flex;
+  gap: 1rem;
+}
+.navbar-btn {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.navbar-btn.logout {
+  background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+  color: #fff;
+}
+.navbar-btn:hover {
+  background: rgba(255,255,255,0.08);
 }
 
-.social-login {
+/* Main Content Layout */
+.main-content {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: rgba(34, 40, 49, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Calendar Styles */
+.calendar-picker {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
+  margin-bottom: 1rem;
+}
+.calendar-picker input[type="date"] {
+  background: #23243a;
+  color: var(--white);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }
 
-.social-login img {
+/* Workout Form Styles */
+.workout-form {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  animation: fadeIn 0.5s;
+}
+.date-label {
+  text-align: right;
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+.exercise-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.muscle-group-select {
+  display: flex;
+  gap: 0.25rem;
+}
+.muscle-btn {
+  background: #23243a;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+}
+.muscle-btn.selected {
+  border: 2px solid var(--primary-color);
+  background: var(--primary-color);
+  color: #fff;
+}
+input[type="number"] {
+  width: 70px;
+  background: #23243a;
+  color: var(--white);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+}
+.remove-ex {
+  background: #ff4b2b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+.superset-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.add-ex {
+  background: var(--accent-color);
+  color: #222;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+}
+.log-btn {
+  background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.7rem 0;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.log-btn:hover {
+  box-shadow: 0 2px 12px rgba(255,75,43,0.18);
+}
+
+/* Workout List Styles */
+.workout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeIn 0.5s;
+}
+.workout-list.old {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+}
+.workout-item {
+  background: rgba(255,255,255,0.10);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  position: relative;
+  animation: slideIn 0.4s;
+}
+.workout-muscle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.workout-details {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1rem;
+  color: var(--white);
+}
+.copy-btn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background: var(--accent-color);
+  color: #222;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.copy-btn:hover {
+  background: #00cc6a;
+}
+.empty {
+  color: #aaa;
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .main-content {
+    max-width: 98vw;
+    padding: 1rem 0.2rem;
+  }
+  .navbar {
+    padding: 0 0.5rem;
+  }
+  .workout-form, .workout-item {
+    padding: 1rem 0.3rem;
+  }
+  .workout-details {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
+.login-container {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form {
+  background: rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  animation: fadeIn 0.5s;
+}
+.login-form h2 {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.login-form input[type="text"] {
+  width: 220px;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #23243a;
+  color: var(--white);
+  font-size: 1.1rem;
+}
+.login-form button {
+  background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.7rem 2rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.login-form button:hover {
+  box-shadow: 0 2px 12px rgba(255,75,43,0.18);
+}
+
+.floating-navbar {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 1200px;
+  background: rgba(34, 40, 49, 0.85);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 2.5rem;
+  z-index: 100;
+  margin-bottom: 2.5rem;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.navbar-logo {
   width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #fff;
+}
+.navbar-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+}
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.navbar-history {
+  background: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
   cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.navbar-history:hover {
+  background: rgba(255,255,255,0.08);
+}
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.navbar-btn.logout {
+  background: linear-gradient(90deg, #ff4b2b, #ff6b6b);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  margin-left: 1rem;
+  box-shadow: 0 2px 8px rgba(255,75,43,0.18);
 }
 
-.auth-footer {
-  margin-top: 10px;
-  font-size: 14px;
+/* 3-Column Layout Refinement */
+.three-col-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.2fr;
+  gap: 2.5rem;
+  margin: 120px auto 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+  min-height: 70vh;
+}
+.three-col {
+  background: rgba(34, 40, 49, 0.85);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2.2rem 1.5rem;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.2rem;
+}
+.left-col, .center-col, .right-col {
+  width: 100%;
 }
 
-.auth-footer span {
-  color: #6a11cb;
-  cursor: pointer;
+/* Calendar Picker Modern Styles */
+.calendar-picker {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.calendar-picker input[type="date"] {
+  background: #23243a;
+  color: var(--white);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  margin-top: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .floating-navbar {
+    width: 98vw;
+    padding: 0.5rem 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .three-col-layout {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-top: 90px;
+  }
+  .three-col {
+    min-height: unset;
+    padding: 1.2rem 0.5rem;
+  }
 }

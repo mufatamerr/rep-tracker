@@ -6,8 +6,52 @@ import RepTracker from "./RepTracker";
 import Auth from "./Auth";
 import VerifyEmail from "./VerifyEmail";
 import "./App.css"; // ✅ Import the updated CSS
+import Navbar from './components/Navbar';
+import WorkoutForm from './components/WorkoutForm';
+import WorkoutList from './components/WorkoutList';
+import Calendar from './components/Calendar';
+import ThreeColumnLayout from './components/ThreeColumnLayout';
+import WorkoutLogPanel from './components/WorkoutLogPanel';
 
-export default function App() {
+const getToday = () => new Date().toISOString().slice(0, 10);
+
+const MainApp = ({ user, onLogout, onProfile }) => {
+  const [date, setDate] = useState(getToday());
+  const [workouts, setWorkouts] = useState({});
+
+  const handleAddWorkout = ({ date, exercises }) => {
+    setWorkouts(prev => ({
+      ...prev,
+      [date]: [...(prev[date] || []), ...exercises]
+    }));
+  };
+
+  const handleCopy = (workout) => {
+    setWorkouts(prev => ({
+      ...prev,
+      [getToday()]: [...(prev[getToday()] || []), workout]
+    }));
+    setDate(getToday());
+  };
+
+  const todayWorkouts = workouts[date] || [];
+  const oldWorkouts = Object.entries(workouts)
+    .filter(([d]) => d !== date)
+    .flatMap(([d, ws]) => ws.map(w => ({ ...w, oldDate: d })));
+
+  return (
+    <div>
+      <Navbar onLogout={onLogout} onProfile={onProfile} />
+      <ThreeColumnLayout
+        left={<Calendar date={date} onChange={setDate} />}
+        center={<WorkoutForm onAdd={handleAddWorkout} date={date} />}
+        right={<WorkoutLogPanel workouts={todayWorkouts} />}
+      />
+    </div>
+  );
+};
+
+function App() {
   const [user, setUser] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +68,6 @@ export default function App() {
       }
       setIsLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
@@ -34,35 +77,25 @@ export default function App() {
     setIsVerified(false);
   };
 
+  const handleProfile = () => {
+    alert('Profile/settings coming soon!');
+  };
+
   if (isLoading) return <div className="text-white text-center">Loading...</div>;
 
   return (
     <Router>
       <div className="background"> {/* ✅ Add the animated background */}
-        <span className="ball"></span>
-        <span className="ball"></span>
-        <span className="ball"></span>
-        <span className="ball"></span>
-        <span className="ball"></span>
-        <span className="ball"></span>
-        <span className="ball"></span>
-        <span className="ball"></span>
       </div>
-
       <Routes>
         <Route path="/" element={user ? (isVerified ? <Navigate to="/dashboard" /> : <Navigate to="/verify-email" />) : <Auth />} />
+        <Route path="/login" element={<Auth />} />
         <Route path="/verify-email" element={user && !isVerified ? <VerifyEmail onVerified={() => setIsVerified(true)} /> : <Navigate to="/" />} />
         <Route
           path="/dashboard"
           element={
             user && isVerified ? (
-              <div>
-                <button onClick={handleLogout} className="logout-btn">
-                  Logout
-                </button>
-
-                <RepTracker />
-              </div>
+              <MainApp user={user} onLogout={handleLogout} onProfile={handleProfile} />
             ) : (
               <Navigate to="/" />
             )
@@ -73,3 +106,5 @@ export default function App() {
     </Router>
   );
 }
+
+export default App;
